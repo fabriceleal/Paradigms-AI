@@ -1,8 +1,9 @@
 
 ; Struct definition
 (defstruct name
+	; These are fields:
 	first-name
-	(middle-name nil)
+	(middle-name nil) ; This is a field with a default value
 	last-name)
 
 ; Create a value, and set it to a var
