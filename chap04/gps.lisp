@@ -4,7 +4,9 @@
 
 ;;;; File gps.lisp: Final version of GPS
 
-(requires "gps1")
+;(requires "gps1")
+(load "gps1.lisp")
+(load "../appendix/mappend.lisp")
 
 ;;; ==============================
 

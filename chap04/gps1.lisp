@@ -4,7 +4,7 @@
 
 ;;;; File gps1.lisp: First version of GPS (General Problem Solver)
 
-(load "../chap03/onparameters.lisp") ; (find-all ...)
+(load "../appendix/find-all.lisp")
 
 (defvar *state* nil "The current state: a list of conditions.")
 
@@ -76,14 +76,14 @@
 ;;; =========
 ; Some tests
 
-(print 1)
-(print (gps '(son-at-home car-needs-battery have-money have-phone-book) '(son-at-school) *school-ops*))
-(print 2)
-(print (gps '(son-at-home car-needs-battery have-money) '(son-at-school) *school-ops*))
-(print 3)
-(gps '(son-at-home car-works) '(son-at-school) *school-ops*)
-(print 4)
-(print (gps '(son-at-home car-needs-battery have-money have-phone-book) '(have-money son-at-school) *school-ops*))
-(print 5)
-(print (gps '(son-at-home car-needs-battery have-money have-phone-book) '(son-at-school have-money) *school-ops*))
+;(print 1)
+;(print (gps '(son-at-home car-needs-battery have-money have-phone-book) '(son-at-school) *school-ops*))
+;(print 2)
+;(print (gps '(son-at-home car-needs-battery have-money) '(son-at-school) *school-ops*))
+;(print 3)
+;(gps '(son-at-home car-works) '(son-at-school) *school-ops*)
+;(print 4)
+;(print (gps '(son-at-home car-needs-battery have-money have-phone-book) '(have-money son-at-school) *school-ops*))
+;(print 5)
+;(print (gps '(son-at-home car-needs-battery have-money have-phone-book) '(son-at-school have-money) *school-ops*))
 
