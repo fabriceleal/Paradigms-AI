@@ -12,3 +12,6 @@
                 (apply #'remove item seq
                         :test (complement test) keyword-args) ) )
 
+; TODO: ...
+(defun find-all-if (pred seq &rest keyword-args)
+	(apply #'remove-if (complement pred) seq keyword-args) )
