@@ -19,7 +19,12 @@
 ; 3 - list of allowable operators
 (defun GPS (*state* goals *ops*)
   "General Problem Solver: achieve all goals using *ops*."
-  (if (every #'achieve goals) 'solved))
+  (if (achieve-all goals) 'solved))
+
+; section 4.7
+(defun achieve-all (goals)
+	"Try to achieve each goal, the make sure they still hold."
+	(and (every #'achieve goals) (subsetp goals *state*)) )
 
 (defun achieve (goal)
   "A goal is achieved if it already holds,
@@ -37,7 +42,7 @@
 ; update state after applying the operator to the current state
 (defun apply-op (op)
   "Print a message and update *state* if op is applicable."
-  (when (every #'achieve (op-preconds op))
+  (when (achieve-all (op-preconds op))
     (print (list 'executing (op-action op)))
     (setf *state* (set-difference *state* (op-del-list op)))
     (setf *state* (union *state* (op-add-list op)))
@@ -67,3 +72,18 @@
          :preconds '(have-money)
          :add-list '(shop-has-money)
          :del-list '(have-money))))
+
+;;; =========
+; Some tests
+
+(print 1)
+(print (gps '(son-at-home car-needs-battery have-money have-phone-book) '(son-at-school) *school-ops*))
+(print 2)
+(print (gps '(son-at-home car-needs-battery have-money) '(son-at-school) *school-ops*))
+(print 3)
+(gps '(son-at-home car-works) '(son-at-school) *school-ops*)
+(print 4)
+(print (gps '(son-at-home car-needs-battery have-money have-phone-book) '(have-money son-at-school) *school-ops*))
+(print 5)
+(print (gps '(son-at-home car-needs-battery have-money have-phone-book) '(son-at-school have-money) *school-ops*))
+
