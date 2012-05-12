@@ -38,9 +38,28 @@
 	(cond ((eq bindings fail) fail)
 		((variable-p pattern) (match-variable pattern input bindings))
 		((eql pattern input) bindings)
+		((segment-pattern-p pattern) (segment-match pattern input bindings))
 		((and (consp pattern) (consp input)) 
 			(pat-match (rest pattern) (rest input)
 				(pat-match (first pattern) (first input) bindings) ) ) ) )
+
+(defun segment-pattern-p (pattern)
+	"Is this a segment patching pattern: ((?* var) . pat)"
+	(and (consp pattern) (equal (first pattern) '?*)) )
+
+(defun segment-match (pattern input bindings &optional (start 0))
+	"Match the segment pattern ((?* var) . pat) against input"
+	(let ((var (second (first pattern))) (pat (rest pattern)))
+		(if (null pat)
+			(match-variable var input bindings)
+			(let ((pos (position (first pat) input :start start :test #'equal))))
+
+				(if (null pos)
+					fail
+					(let ((b2 (pat-match pat (subseq input pos) bindings)))
+						(if (eq b2 fail)
+							(segment-match pattern input bindings (+ pos 1))
+							(match-variable var (subseq input 0 pos) b2) ) ) ) ) ) )
 
 (defun match-variable (var input bindings)
 	"Does var match input? Uses or updates and returns bindings"
