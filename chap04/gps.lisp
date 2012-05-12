@@ -7,6 +7,7 @@
 ;(requires "gps1")
 (load "gps1.lisp")
 (load "../appendix/mappend.lisp")
+(load "dbg.lisp")
 
 ;;; ==============================
 
@@ -260,4 +261,8 @@
               bag)))
 
 ;;; ==============================
+;; Usage:
+;; (use *ops-list*)
+;; (gps ......)
+
 
