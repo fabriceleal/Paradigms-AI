@@ -21,7 +21,7 @@
 	"Print indented debugging info if (DEBUG id) has been specified."
 	(when (member id *dbg-ids*)
 		(fresh-line *debug-io*)
-		(dotimes (i indent) (princ " " *debug-info*))
+		(dotimes (i indent) (princ " " *debug-io*))
 		(apply #'format *debug-io* format-string args) ) )
 
 
