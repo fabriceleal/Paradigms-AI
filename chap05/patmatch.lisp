@@ -73,3 +73,9 @@
 	"Is x a variable (a symbol beginning with ?)"
 	(and (symbolp x) (equal (char (symbol-name x) 0) #\?)) )
 
+
+(defun rule-pattern (rule) (first rule))
+(defun rule-responses (rul) (rest rule))
+
+
+
